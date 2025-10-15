@@ -31,7 +31,7 @@ function Login({ onLogin }) {
             {
                 error && <div className="absolute top-10 bg-gray-200 text-red-500 p-2.5 rounded-lg flex items-center m-6">
                     <p className="font-mono font-bold">{error}</p>
-                    <button onClick={()=>setError("")} className=""><img className="max-w-8" src="—Pngtree—cross icon wrong sign vector_20826131.png" alt="wrong" /></button>
+                    <button onClick={()=>setError("")} ><img className="max-w-8" src="—Pngtree—cross icon wrong sign vector_20826131.png" alt="wrong" /></button>
                 </div>
             }
             
