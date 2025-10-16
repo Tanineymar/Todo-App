@@ -35,7 +35,7 @@ function Login({ onLogin }) {
                 </div>
             }
             
-            <form className="flex flex-col bg-blue-900 text-white p-8 rounded-2xl a" onSubmit={handleLogin}>
+            <form className="flex flex-col bg-blue-900 text-white p-8 rounded-2xl " onSubmit={handleLogin}>
                 <h2 className="text-4xl mb-2.5">Login</h2>
                 <p className="text-gray-300">Login to continue</p>
                 <input className="border rounded-lg p-2 my-3 w-full outline-none "

@@ -20,7 +20,7 @@ import {  useState } from "react"
    
     
     return(
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/5 backdrop-blur-sm">
+        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/35 backdrop-blur-sm">
 
         
         <div className= "bg-blue-900 max-w-2xl w-full sm:w-[500px] p-6 m-6 rounded-2xl relative">
