@@ -30,22 +30,32 @@ function TodoApp() {
                     className="bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg text-white font-medium p-2.5 mb-4">
                     Create Task</button>
             </div>
-            <div>
+            <div className="flex flex-col ">
                 {
                     tasks.map((task) => (
                         <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-blue-600 ">
                             <h2 className="font-semibold text-white text-lg mb-3">{task.taskName}</h2>
                             <p className="text-gray-300 mb-3">{task.description}</p>
-                            <button onClick={() => {
-                                const updatedTasks = tasks.filter((_, i) => i !== index);
+                          <div className="flex gap-2 pl-54">
+                              <button onClick={() => {
+                                const updatedTasks = tasks.filter((t) => t.id !== task.id);
                                 setTasks(updatedTasks);
                             }}
-                                className="hover:bg-red-600 p-1 rounded-md ease-in {} active:bg-red-600 p-1 rounded-md ease-in ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash ">
+
+                                className="p-1 rounded-md  bg-red-500 hover:bg-red-600 active:bg-red-600 active:scale-95 transition-all  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash ">
                                     <path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
                                     <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
                                 </svg>
                             </button>
+                            <button className="p-1 rounded-md bg-blue-700 hover:bg-blue-800 active:scale-95 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                    stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 20h9" />
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                                </svg>
+                            </button>
+                          </div>
                         </div>
                     ))
                 }
