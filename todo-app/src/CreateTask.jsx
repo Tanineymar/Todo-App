@@ -44,25 +44,25 @@ useEffect(()=>{
 
                 {
                     error && <div className="flex justify-evenly text-red-500 bg-gray-200 p-1 rounded-lg mb-3">
-                        <p className="font-bold font-mono">{error}</p>
+                        <p className="font-bold font-mono ">{error}</p>
                         <button onClick={() => setError("")}><img className="max-w-6" src="—Pngtree—cross icon wrong sign vector_20826131.png" alt="wrong" /></button>
                     </div>
                 }
 
                 <form onSubmit={handleSubmit} className="flex flex-col text-white ">
-                    <h1 className="font-medium text-2xl text-white flex items-center">
+                    <h1 className="font-medium text-2xl flex items-center">
                         {
                             editingTask? "Edit Task" : "Create New Task"
                         }</h1>
                     <p className="text-gray-400 mb-3.5">Remember your task so that you don't forget any of them. </p>
 
-                    <label htmlFor="taskName" className="font-medium mb-2">Task Name</label>
-                    <input value={taskName} onChange={(event) => setTaskName(event.target.value)} className="border p-2 outline-none mb-2 rounded-lg  " type="text" placeholder="Enter task name" />
+                    <label htmlFor="taskName" className="font-medium mb-2 ">Task Name</label>
+                    <input value={taskName} onChange={(event) => setTaskName(event.target.value)} className="border p-2 outline-none mb-2 rounded-lg " type="text" placeholder="Enter task name" />
 
                     <label htmlFor="description" className="font-medium mb-2">Description</label>
-                    <input value={description} onChange={(event) => setDescription(event.target.value)} className="border p-2  outline-none mb-4 rounded-lg" type="text" placeholder="Description..." />
+                    <input value={description} onChange={(event) => setDescription(event.target.value)} className="border p-2  outline-none mb-4 rounded-lg " type="text" placeholder="Description..." />
                     <div className="flex  justify-between  ">
-                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg " type="submit">{editingTask? "Update": "Create"}</button>
+                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg" type="submit">{editingTask? "Update": "Create"}</button>
                         <button className=" px-10 p-1.5 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800  rounded-lg"  type="button" onClick={onCancel}>Cancel</button>
                     </div>
                 </form>

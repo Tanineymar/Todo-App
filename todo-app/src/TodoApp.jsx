@@ -1,21 +1,42 @@
 import { useEffect, useState } from "react"
 import CreateTask from "./createTask"
+import Login from "./Login"
 
 
 function TodoApp() {
     const [showForm, setShowForm] = useState(false)
     const [editingTask , setEditingTask]=useState(null)
-
+    const [isLoggedIn , setIsLoggedIn]=useState(false)
+ 
 
     const [tasks, setTasks] = useState(() => {
         const savedTasks = localStorage.getItem("tasks");
         return savedTasks ? JSON.parse(savedTasks) : [];
     });
+    
 
+    useEffect(()=>{
+        const loginStatus =localStorage.getItem('loggedIn');
+        if(loginStatus === 'true'){
+            setIsLoggedIn(true);
+        }
+    },[])
 
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks])
+
+
+    const handleLogin=()=>{
+        setIsLoggedIn(true)
+    }
+ const handleLogout=()=>{
+    localStorage.removeItem("loggedIn");
+    setIsLoggedIn(false);
+ };
+
+
+
 
 
     const handleCreateTask = (newTask) => {
@@ -33,6 +54,7 @@ function TodoApp() {
     };
 
     return (
+
         <div className="bg-blue-950 min-h-screen p-6 ">
 
             <div>
@@ -45,7 +67,7 @@ function TodoApp() {
             <div className="flex flex-col ">
                 {
                     tasks.map((task) => (
-                        <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-blue-600 ">
+                        <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-amber-200 ">
                             <h2 className="font-semibold text-white text-lg mb-3">{task.taskName}</h2>
                             <p className="text-gray-300 mb-3">{task.description}</p>
                           <div className="flex justify-end gap-2">
@@ -78,7 +100,8 @@ function TodoApp() {
                     ))
                 }                
             </div>
-            {showForm && <CreateTask onCancel={() =>{setShowForm(false)
+            {showForm && <CreateTask onCancel={() =>{
+                setShowForm(false)
                 setEditingTask(null);
             }}
                 onCreate={handleCreateTask} 
