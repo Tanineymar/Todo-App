@@ -4,6 +4,7 @@ import CreateTask from "./createTask"
 
 function TodoApp() {
     const [showForm, setShowForm] = useState(false)
+    const [editingTask , setEditingTask]=useState(null)
 
 
     const [tasks, setTasks] = useState(() => {
@@ -11,14 +12,25 @@ function TodoApp() {
         return savedTasks ? JSON.parse(savedTasks) : [];
     });
 
+
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks])
+
 
     const handleCreateTask = (newTask) => {
         setTasks([...tasks, newTask])
         setShowForm(false)
     }
+
+    const handleUpdateTask=(updatedTask)=>{
+        const updatedTasks =tasks.map((task)=>
+            task.id === updatedTask.id ? updatedTask:task
+    );
+        setTasks(updatedTasks);
+        setEditingTask(null);
+        setShowForm(false);
+    };
 
     return (
         <div className="bg-blue-950 min-h-screen p-6 ">
@@ -36,20 +48,26 @@ function TodoApp() {
                         <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-blue-600 ">
                             <h2 className="font-semibold text-white text-lg mb-3">{task.taskName}</h2>
                             <p className="text-gray-300 mb-3">{task.description}</p>
-                          <div className="flex gap-2 pl-54">
+                          <div className="flex justify-end gap-2">
                               <button onClick={() => {
                                 const updatedTasks = tasks.filter((t) => t.id !== task.id);
                                 setTasks(updatedTasks);
                             }}
 
                                 className="p-1 rounded-md  bg-red-500 hover:bg-red-600 active:bg-red-600 active:scale-95 transition-all  ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash ">
                                     <path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
                                     <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
                                 </svg>
                             </button>
-                            <button className="p-1 rounded-md bg-blue-700 hover:bg-blue-800 active:scale-95 transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            <button onClick={()=>{
+                                setEditingTask(task)
+                                setShowForm(true)
+                            }}
+                                    
+                                     
+                            className="p-1 rounded-md bg-blue-700 hover:bg-blue-800 active:scale-95 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                     stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M12 20h9" />
                                     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
@@ -58,12 +76,19 @@ function TodoApp() {
                           </div>
                         </div>
                     ))
-                }
+                }                
             </div>
-            {showForm && <CreateTask onCancel={() => setShowForm(false)}
-                onCreate={handleCreateTask} />}
+            {showForm && <CreateTask onCancel={() =>{setShowForm(false)
+                setEditingTask(null);
+            }}
+                onCreate={handleCreateTask} 
+                onUpdate={handleUpdateTask}
+                editingTask={editingTask}/>}
 
         </div>
+    
     )
 }
 export default TodoApp
+
+

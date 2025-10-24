@@ -1,11 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const CreateTask = ({ onCancel, onCreate }) => {
-    const [taskName, settaskName] = useState("");
+const CreateTask = ({ onCancel, onCreate, onUpdate ,editingTask }) => {
+    const [taskName, setTaskName] = useState("");
     const [description, setDescription] = useState("");
     const [error, setError] = useState('')
+ 
 
-
+useEffect(()=>{
+    if(editingTask){
+        setTaskName(editingTask.taskName);
+        setDescription(editingTask.description)
+    }
+},[editingTask])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,14 +20,16 @@ const CreateTask = ({ onCancel, onCreate }) => {
             return;
         }
         const newTask = {
-            id: Date.now(),
+            id:  editingTask ? editingTask.id :Date.now(),
             taskName,
             description,
         };
-
-        onCreate(newTask)
-
-        settaskName("");
+        if (editingTask){
+            onUpdate(newTask);
+        }else{
+            onCreate(newTask)
+        }
+        setTaskName("");
         setDescription("");
         setError("");
 
@@ -42,17 +50,20 @@ const CreateTask = ({ onCancel, onCreate }) => {
                 }
 
                 <form onSubmit={handleSubmit} className="flex flex-col text-white ">
-                    <h1 className="font-medium text-2xl text-white flex items-center">Create New Task</h1>
+                    <h1 className="font-medium text-2xl text-white flex items-center">
+                        {
+                            editingTask? "Edit Task" : "Create New Task"
+                        }</h1>
                     <p className="text-gray-400 mb-3.5">Remember your task so that you don't forget any of them. </p>
 
                     <label htmlFor="taskName" className="font-medium mb-2">Task Name</label>
-                    <input value={taskName} onChange={(event) => settaskName(event.target.value)} className="border p-2 outline-none mb-2 rounded-lg  " type="text" placeholder="Enter task name" />
+                    <input value={taskName} onChange={(event) => setTaskName(event.target.value)} className="border p-2 outline-none mb-2 rounded-lg  " type="text" placeholder="Enter task name" />
 
                     <label htmlFor="description" className="font-medium mb-2">Description</label>
                     <input value={description} onChange={(event) => setDescription(event.target.value)} className="border p-2  outline-none mb-4 rounded-lg" type="text" placeholder="Description..." />
                     <div className="flex  justify-between  ">
-                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg " type="submit" >Create</button>
-                        <button className=" px-10 p-1.5 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800  rounded-lg" onClick={onCancel}>Cancel</button>
+                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg " type="submit">{editingTask? "Update": "Create"}</button>
+                        <button className=" px-10 p-1.5 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800  rounded-lg"  type="button" onClick={onCancel}>Cancel</button>
                     </div>
                 </form>
             </div>
