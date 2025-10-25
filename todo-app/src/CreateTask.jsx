@@ -4,6 +4,7 @@ const CreateTask = ({ onCancel, onCreate, onUpdate ,editingTask }) => {
     const [taskName, setTaskName] = useState("");
     const [description, setDescription] = useState("");
     const [error, setError] = useState('')
+
  
 
 useEffect(()=>{
@@ -19,11 +20,16 @@ useEffect(()=>{
             setError("Please fill both fields!");
             return;
         }
+        const now =new Date();
+        const currentDate =now.toLocaleDateString();
+        const currentTime =now.toLocaleTimeString();
         const newTask = {
-            id:  editingTask ? editingTask.id :Date.now(),
-            taskName,
-            description,
-        };
+        id: Date.now(),
+        taskName,
+        description,
+        date: currentDate,
+        time: currentTime
+    };
         if (editingTask){
             onUpdate(newTask);
         }else{

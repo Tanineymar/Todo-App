@@ -36,13 +36,15 @@ function TodoApp() {
  };
 
 
+const handleCreateTask = (task) => {
+    setTasks(prev => {
+        const updatedTasks = [...prev, task];
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        return updatedTasks;
+    });
+    setShowForm(false);
+};
 
-
-
-    const handleCreateTask = (newTask) => {
-        setTasks([...tasks, newTask])
-        setShowForm(false)
-    }
 
     const handleUpdateTask=(updatedTask)=>{
         const updatedTasks =tasks.map((task)=>
@@ -53,12 +55,16 @@ function TodoApp() {
         setShowForm(false);
     };
 
+    if(!isLoggedIn){
+        return <Login onLogin={handleLogin}/>
+    }
+
     return (
 
         <div className="bg-blue-950 min-h-screen p-6 ">
 
             <div>
-                <h1 className=" flex justify-evenly text-white text-3xl font-medium mb-5">My Todos </h1>
+                <h1 className=" flex justify-evenly text-white  text-3xl font-medium mb-5">My Todos </h1>
                 <h1 className="text-2xl text-white mb-4">Assigned</h1>
                 <button onClick={() => setShowForm(true)}
                     className="bg-blue-700 hover:bg-blue-800 hover:border-amber-200 active:bg-blue-800 rounded-lg text-white font-medium p-2.5 mb-4 border-2 border-blue-700">
@@ -70,7 +76,12 @@ function TodoApp() {
                         <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-amber-200 ">
                             <h2 className="font-semibold text-white text-lg mb-3">{task.taskName}</h2>
                             <p className="text-gray-200 mb-3">{task.description}</p>
-                          <div className="flex justify-end gap-2">
+                           
+                    
+                          <div className="flex justify-between">
+                            <p className="text-gray-300 text-sm">{task.date} | {task.time}</p>
+                            
+                            <div className="flex gap-2">
                               <button onClick={() => {
                                 const updatedTasks = tasks.filter((t) => t.id !== task.id);
                                 setTasks(updatedTasks);
@@ -95,6 +106,7 @@ function TodoApp() {
                                     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
                                 </svg>
                             </button>
+                            </div>
                           </div>
                         </div>
                     ))
