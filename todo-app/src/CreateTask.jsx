@@ -43,9 +43,9 @@ useEffect(()=>{
             <div className="bg-blue-900 max-w-2xl w-full sm:w-[500px] p-6 m-6 rounded-2xl relative">
 
                 {
-                    error && <div className="flex justify-evenly text-red-500 bg-gray-200 p-1 rounded-lg mb-3">
-                        <p className="font-bold font-mono ">{error}</p>
-                        <button onClick={() => setError("")}><img className="max-w-6" src="—Pngtree—cross icon wrong sign vector_20826131.png" alt="wrong" /></button>
+                    error && <div className="flex justify-between text-red-600 bg-gray-200 p-1 rounded-lg mb-3">
+                        <p className=" font-bold font-mono">{error}</p>
+                        <button onClick={() => setError("")}><svg className="bg-red-200 border border-red-200 hover:border-red-600 rounded-md " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     </div>
                 }
 
@@ -62,8 +62,8 @@ useEffect(()=>{
                     <label htmlFor="description" className="font-medium mb-2">Description</label>
                     <input value={description} onChange={(event) => setDescription(event.target.value)} className="border p-2  outline-none mb-4 rounded-lg " type="text" placeholder="Description..." />
                     <div className="flex  justify-between  ">
-                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg" type="submit">{editingTask? "Update": "Create"}</button>
-                        <button className=" px-10 p-1.5 bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800  rounded-lg"  type="button" onClick={onCancel}>Cancel</button>
+                        <button className=" p-1.5 px-10 bg-blue-700 hover:bg-blue-800 hover:border-white  active:bg-blue-800 rounded-lg border border-blue-700" type="submit">{editingTask? "Update": "Create"}</button>
+                        <button className=" px-10 p-1.5 bg-blue-700 hover:bg-blue-800  hover:border-white active:bg-blue-800  rounded-lg border border-blue-700"  type="button " onClick={onCancel}>Cancel</button>
                     </div>
                 </form>
             </div>

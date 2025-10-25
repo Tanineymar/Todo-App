@@ -61,7 +61,7 @@ function TodoApp() {
                 <h1 className=" flex justify-evenly text-white text-3xl font-medium mb-5">My Todos </h1>
                 <h1 className="text-2xl text-white mb-4">Assigned</h1>
                 <button onClick={() => setShowForm(true)}
-                    className="bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg text-white font-medium p-2.5 mb-4">
+                    className="bg-blue-700 hover:bg-blue-800 hover:border-amber-200 active:bg-blue-800 rounded-lg text-white font-medium p-2.5 mb-4 border-2 border-blue-700">
                     Create Task</button>
             </div>
             <div className="flex flex-col ">
@@ -69,7 +69,7 @@ function TodoApp() {
                     tasks.map((task) => (
                         <div key={task.id} className="border-2 mb-5 max-w-2xl rounded-2xl p-3 border-amber-200 ">
                             <h2 className="font-semibold text-white text-lg mb-3">{task.taskName}</h2>
-                            <p className="text-gray-300 mb-3">{task.description}</p>
+                            <p className="text-gray-200 mb-3">{task.description}</p>
                           <div className="flex justify-end gap-2">
                               <button onClick={() => {
                                 const updatedTasks = tasks.filter((t) => t.id !== task.id);
@@ -113,5 +113,6 @@ function TodoApp() {
     )
 }
 export default TodoApp
+
 
 

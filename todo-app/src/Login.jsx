@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState , useEffect} from "react"
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function Login({ onLogin }) {
             {
                 error && <div className="absolute top-10 bg-gray-200 text-red-500 p-2.5 rounded-lg flex items-center m-6">
                     <p className="font-mono font-bold text-sm">{error}</p>
-                    <button onClick={() => setError("")} ><img className="max-w-8" src="—Pngtree—cross icon wrong sign vector_20826131.png" alt="wrong" /></button>
+                    <button onClick={() => setError("")} ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                 </div>
             }
 
@@ -43,7 +43,7 @@ function Login({ onLogin }) {
                     type="email" onChange={(event) => setEmail(event.target.value)} name="email" placeholder="Enter Email" />
                 <input className="border p-2 mb-3 w-full rounded-lg outline-none"
                     type="password" onChange={(event) => setPassword(event.target.value)} name="password" placeholder="Enter Password" />
-                <button className="bg-blue-700 hover:bg-blue-800 hover:border active:bg-blue-800 rounded-lg  text-white py-2">Login</button>
+                <button className="bg-blue-700 hover:bg-blue-800 hover:border-white active:bg-blue-800 rounded-lg  text-white py-2 border border-blue-700">Login</button>
             </form>
 
 

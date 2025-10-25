@@ -1,36 +1,36 @@
-import { useEffect, useState } from 'react'
-import Login from './Login'
-import TodoApp from './TodoApp'
-import { Link, Route, Routes } from 'react-router';
+import { useState, useEffect } from "react";
+import Login from "./Login";
+import TodoApp from "./TodoApp";
 
 function App() {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect[()=>{
-    const loggedInStatus = localStorage.getItem("loggedIn")
-    if(loggedInStatus === "true"){
-      setIsLoggedIn(true)
-    }
-  },[]]
 
-  const handleLogin =()=>{
-    localStorage.setItem("loggedIn", "true");
-    setIsLoggedIn(false)
-  }
+  
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+    if (loggedIn) setIsLoggedIn(true);
+  }, []);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem("loggedIn", "true"); 
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("loggedIn"); 
+  };
 
   return (
-    <>
-
-      {
-        isLoggedIn ? (
-          <TodoApp />
-        ) : (
-          <Login onLogin={() => setIsLoggedIn(true)} />
-        )
-      }
-    </>
-  )
+    <div>
+      {isLoggedIn ? (
+        <TodoApp onLogout={handleLogout} />
+      ) : (
+        <Login onLogin={handleLogin} />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
+
